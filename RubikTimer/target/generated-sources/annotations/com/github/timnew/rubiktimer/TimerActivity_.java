@@ -11,8 +11,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.TextView;
-import com.github.timnew.rubiktimer.R.id;
 import com.github.timnew.rubiktimer.R.layout;
 
 public final class TimerActivity_
@@ -31,7 +29,6 @@ public final class TimerActivity_
     }
 
     private void afterSetContentView_() {
-        hello = ((TextView) findViewById(id.hello));
         afterViews();
     }
 
