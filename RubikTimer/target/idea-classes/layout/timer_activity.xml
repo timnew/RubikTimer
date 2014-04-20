@@ -7,7 +7,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/standard_margin">
 
         <ImageView
             android:id="@+id/profile_icon"
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/standard_margin"
         android:background="@drawable/finger_left_button" />
 
     <Button
@@ -42,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/standard_margin"
         android:background="@drawable/figer_right_button" />
 
     <TextView
@@ -51,15 +52,16 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textSize="50sp"
+        android:textSize="@dimen/timer_text_size"
         tools:text="10:00.000" />
 
     <Button
-        android:id="@+id/abort"
+        android:id="@+id/abort_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/standard_margin"
         android:background="@drawable/abort_button" />
 
 </RelativeLayout>

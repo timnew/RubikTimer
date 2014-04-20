@@ -10,11 +10,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.github.timnew.rubiktimer.R.id;
 import com.github.timnew.rubiktimer.R.layout;
-import com.github.timnew.rubiktimer.typefaces.KozGoProTypeface_;
 
 public final class TimerActivity_
     extends TimerActivity
@@ -29,12 +31,31 @@ public final class TimerActivity_
     }
 
     private void init_(Bundle savedInstanceState) {
-        typeface = KozGoProTypeface_.getInstance_(this);
+        timerTriggerManager = TimerTriggerManager_.getInstance_(this);
+        gameTimer = GameTimer_.getInstance_(this);
     }
 
     private void afterSetContentView_() {
-        timer = ((TextView) findViewById(id.timer));
-        ((KozGoProTypeface_) typeface).afterSetContentView_();
+        profileName = ((TextView) findViewById(id.profile_name));
+        profileIcon = ((ImageView) findViewById(id.profile_icon));
+        abortButton = ((Button) findViewById(id.abort_button));
+        {
+            View view = findViewById(id.abort_button);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        TimerActivity_.this.abortButtonClicked();
+                    }
+
+                }
+                );
+            }
+        }
+        ((TimerTriggerManager_) timerTriggerManager).afterSetContentView_();
+        ((GameTimer_) gameTimer).afterSetContentView_();
         afterViews();
     }
 

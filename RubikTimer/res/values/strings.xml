@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">RubikTimer</string>
+    <string name="app_name">RubikTimer</string>
+    <string name="abort_dialog_title">Abort?</string>
+    <string name="abort_dialog_text">Abort will stop the timer and the time won\'t be stored.</string>
+    <string name="abort_dialog_yes">Yes</string>
+    <string name="abort_dialog_no">No</string>
 </resources>

@@ -3,19 +3,20 @@
 //
 
 
-package com.github.timnew.rubiktimer.typefaces;
+package com.github.timnew.rubiktimer;
 
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import android.widget.Button;
 
-public final class KozGoProTypeface_
-    extends KozGoProTypeface
+public final class TimerTriggerManager_
+    extends TimerTriggerManager
 {
 
     private Context context_;
 
-    private KozGoProTypeface_(Context context) {
+    private TimerTriggerManager_(Context context) {
         context_ = context;
         init_();
     }
@@ -24,6 +25,9 @@ public final class KozGoProTypeface_
         if (!(context_ instanceof Activity)) {
             return ;
         }
+        rightButton = ((Button) findViewById(com.github.timnew.rubiktimer.R.id.finger_right_button));
+        leftButton = ((Button) findViewById(com.github.timnew.rubiktimer.R.id.finger_left_button));
+        afterViews();
     }
 
     /**
@@ -40,12 +44,10 @@ public final class KozGoProTypeface_
         if (context_ instanceof Activity) {
             Activity activity = ((Activity) context_);
         }
-        context = context_;
-        afterInject();
     }
 
-    public static KozGoProTypeface_ getInstance_(Context context) {
-        return new KozGoProTypeface_(context);
+    public static TimerTriggerManager_ getInstance_(Context context) {
+        return new TimerTriggerManager_(context);
     }
 
     public void rebind(Context context) {
