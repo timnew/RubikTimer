@@ -1,9 +1,6 @@
 package com.github.timnew.rubiktimer;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
@@ -17,9 +14,11 @@ import com.googlecode.androidannotations.annotations.RootContext;
 import com.googlecode.androidannotations.annotations.SystemService;
 import com.googlecode.androidannotations.annotations.ViewById;
 
+import static android.os.Handler.Callback;
+import static android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+
 @EBean
 public class GameTimer {
-    private static final String TIMER_TAG = "Game Timer";
     private static final int UPDATE_INTERVAL = 10;
     public static final int REFRESH_TIMER = 101;
 
@@ -35,27 +34,24 @@ public class GameTimer {
     @ViewById(R.id.timer)
     protected TextView timerView;
 
-    private PowerManager.WakeLock wakeLock;
     private long totalTime = 0;
     private long startTime = 0;
     private boolean isTiming = false;
 
-    private Handler uiCallback;
+    private Handler uiUpdater;
 
     @AfterViews
     protected void afterViews() {
         typeface.applyTo(timerView);
 
-        wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TIMER_TAG);
-
-        uiCallback = new Handler(new Handler.Callback() {
+        uiUpdater = new Handler(new Callback() {
             @Override
             public boolean handleMessage(Message msg) {
                 if (msg.what != REFRESH_TIMER)
                     return false;
 
                 if (isTiming) {
-                    uiCallback.sendEmptyMessageDelayed(REFRESH_TIMER, UPDATE_INTERVAL);
+                    uiUpdater.sendEmptyMessageDelayed(REFRESH_TIMER, UPDATE_INTERVAL);
                     updateTimer();
                 }
 
@@ -79,11 +75,12 @@ public class GameTimer {
 
         isTiming = true;
         startTime = System.currentTimeMillis();
-//        wakeLock.acquire();
 
-        uiCallback.sendEmptyMessageDelayed(REFRESH_TIMER, UPDATE_INTERVAL);
+        uiUpdater.sendEmptyMessageDelayed(REFRESH_TIMER, UPDATE_INTERVAL);
 
         updateTimer();
+
+        activity.getWindow().addFlags(FLAG_KEEP_SCREEN_ON);
     }
 
     private void updateTimer() {
@@ -112,20 +109,12 @@ public class GameTimer {
 
         updateTimer();
 
-//        wakeLock.release();
+        activity.getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);
     }
 
     public void restart() {
         totalTime = 0;
         refresh();
         start();
-    }
-
-    public static class AlarmReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-        }
     }
 }
