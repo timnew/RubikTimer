@@ -1,4 +1,4 @@
-package com.github.timnew.rubiktimer;
+package com.github.timnew.rubiktimer.timer;
 
 import android.app.Activity;
 import android.os.Handler;
@@ -6,6 +6,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.widget.TextView;
 
+import com.github.timnew.rubiktimer.R;
 import com.github.timnew.rubiktimer.typefaces.KozGoProTypeface;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Bean;

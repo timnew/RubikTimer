@@ -1,12 +1,13 @@
-package com.github.timnew.rubiktimer;
+package com.github.timnew.rubiktimer.timer;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.github.timnew.rubiktimer.R;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.Click;
@@ -15,11 +16,10 @@ import com.googlecode.androidannotations.annotations.ViewById;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.github.timnew.rubiktimer.GameTimer.OnTimerStatusChangedListener;
-import static com.github.timnew.rubiktimer.TimerTriggerManager.OnTimerTriggeredListener;
+import static com.github.timnew.rubiktimer.timer.GameTimer.OnTimerStatusChangedListener;
 
 @EActivity(R.layout.timer_activity)
-public class TimerActivity extends SherlockActivity implements OnTimerStatusChangedListener {
+public class TimerActivity extends FragmentActivity implements OnTimerStatusChangedListener {
     @Bean
     protected TimerTriggerManager timerTriggerManager;
 
@@ -37,7 +37,7 @@ public class TimerActivity extends SherlockActivity implements OnTimerStatusChan
 
     @AfterViews
     protected void afterViews() {
-        timerTriggerManager.setTriggeredListener(new OnTimerTriggeredListener() {
+        timerTriggerManager.setTriggeredListener(new TimerTriggerManager.OnTimerTriggeredListener() {
             @Override
             public void onTimerTriggered() {
                 gameTimer.toggle();
