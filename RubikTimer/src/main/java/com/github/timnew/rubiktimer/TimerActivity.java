@@ -9,7 +9,7 @@ import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.ViewById;
 
-@EActivity(R.layout.activity_main)
+@EActivity(R.layout.timer_activity)
 public class TimerActivity extends SherlockActivity {
 
     @Bean

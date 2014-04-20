@@ -4,6 +4,29 @@
     android:layout_height="match_parent"
     tools:context=".TimerActivity_">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/profile_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_profile" />
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/profile_icon"
+            tools:text="TimNew" />
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/finger_left_button"
         android:layout_width="wrap_content"
@@ -30,5 +53,13 @@
         android:layout_centerVertical="true"
         android:textSize="50sp"
         tools:text="10:00.000" />
+
+    <Button
+        android:id="@+id/abort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/abort_button" />
 
 </RelativeLayout>

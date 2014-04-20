@@ -11,7 +11,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.TextView;
+import com.github.timnew.rubiktimer.R.id;
 import com.github.timnew.rubiktimer.R.layout;
+import com.github.timnew.rubiktimer.typefaces.KozGoProTypeface_;
 
 public final class TimerActivity_
     extends TimerActivity
@@ -22,13 +25,16 @@ public final class TimerActivity_
     public void onCreate(Bundle savedInstanceState) {
         init_(savedInstanceState);
         super.onCreate(savedInstanceState);
-        setContentView(layout.activity_main);
+        setContentView(layout.timer_activity);
     }
 
     private void init_(Bundle savedInstanceState) {
+        typeface = KozGoProTypeface_.getInstance_(this);
     }
 
     private void afterSetContentView_() {
+        timer = ((TextView) findViewById(id.timer));
+        ((KozGoProTypeface_) typeface).afterSetContentView_();
         afterViews();
     }
 
