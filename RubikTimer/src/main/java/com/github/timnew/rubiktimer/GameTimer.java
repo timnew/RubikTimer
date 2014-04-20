@@ -19,9 +19,8 @@ import static android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
 
 @EBean
 public class GameTimer {
-    private static final int UPDATE_INTERVAL = 10;
     public static final int REFRESH_TIMER = 101;
-
+    private static final int UPDATE_INTERVAL = 10;
     @RootContext
     protected Activity activity;
 
@@ -39,6 +38,8 @@ public class GameTimer {
     private boolean isTiming = false;
 
     private Handler uiUpdater;
+
+    private OnTimerStatusChangedListener statusChangedListener;
 
     @AfterViews
     protected void afterViews() {
@@ -64,9 +65,15 @@ public class GameTimer {
 
     public void toggle() {
         if (isTiming)
-            pause();
+            stop();
         else
             restart();
+    }
+
+    public void restart() {
+        totalTime = 0;
+        refresh();
+        start();
     }
 
     public void start() {
@@ -81,6 +88,21 @@ public class GameTimer {
         updateTimer();
 
         activity.getWindow().addFlags(FLAG_KEEP_SCREEN_ON);
+
+        onStatusChanged();
+    }
+
+    public void stop() {
+        if (!isTiming)
+            return;
+
+        isTiming = false;
+
+        updateTimer();
+
+        activity.getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);
+
+        onStatusChanged();
     }
 
     private void updateTimer() {
@@ -101,20 +123,22 @@ public class GameTimer {
         timerView.setText(timeText);
     }
 
-    public void pause() {
-        if (!isTiming)
+    private void onStatusChanged() {
+        if (statusChangedListener == null)
             return;
 
-        isTiming = false;
-
-        updateTimer();
-
-        activity.getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);
+        statusChangedListener.onTimerStatusChanged(this, isTiming);
     }
 
-    public void restart() {
-        totalTime = 0;
-        refresh();
-        start();
+    public OnTimerStatusChangedListener getStatusChangedListener() {
+        return statusChangedListener;
+    }
+
+    public void setStatusChangedListener(OnTimerStatusChangedListener statusChangedListener) {
+        this.statusChangedListener = statusChangedListener;
+    }
+
+    public static interface OnTimerStatusChangedListener {
+        void onTimerStatusChanged(GameTimer timer, boolean status);
     }
 }

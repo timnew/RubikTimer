@@ -62,6 +62,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/standard_margin"
-        android:background="@drawable/abort_button" />
+        android:background="@drawable/abort_button"
+        android:visibility="gone" />
 
 </RelativeLayout>

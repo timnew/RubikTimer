@@ -31,14 +31,14 @@ public final class TimerActivity_
     }
 
     private void init_(Bundle savedInstanceState) {
-        timerTriggerManager = TimerTriggerManager_.getInstance_(this);
         gameTimer = GameTimer_.getInstance_(this);
+        timerTriggerManager = TimerTriggerManager_.getInstance_(this);
     }
 
     private void afterSetContentView_() {
         profileName = ((TextView) findViewById(id.profile_name));
-        profileIcon = ((ImageView) findViewById(id.profile_icon));
         abortButton = ((Button) findViewById(id.abort_button));
+        profileIcon = ((ImageView) findViewById(id.profile_icon));
         {
             View view = findViewById(id.abort_button);
             if (view!= null) {
@@ -54,8 +54,8 @@ public final class TimerActivity_
                 );
             }
         }
-        ((TimerTriggerManager_) timerTriggerManager).afterSetContentView_();
         ((GameTimer_) gameTimer).afterSetContentView_();
+        ((TimerTriggerManager_) timerTriggerManager).afterSetContentView_();
         afterViews();
     }
 

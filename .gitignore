@@ -11,6 +11,8 @@
 # Generated files
 bin/
 gen/
+target/
+gen-external-apklibs/
 
 # Gradle files
 .gradle/
@@ -23,4 +25,5 @@ local.properties
 proguard/
 
 **/*.iml
+
 

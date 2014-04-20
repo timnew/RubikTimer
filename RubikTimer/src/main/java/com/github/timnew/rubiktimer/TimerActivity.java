@@ -13,10 +13,13 @@ import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.ViewById;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static com.github.timnew.rubiktimer.GameTimer.OnTimerStatusChangedListener;
 import static com.github.timnew.rubiktimer.TimerTriggerManager.OnTimerTriggeredListener;
 
 @EActivity(R.layout.timer_activity)
-public class TimerActivity extends SherlockActivity {
+public class TimerActivity extends SherlockActivity implements OnTimerStatusChangedListener {
     @Bean
     protected TimerTriggerManager timerTriggerManager;
 
@@ -40,11 +43,12 @@ public class TimerActivity extends SherlockActivity {
                 gameTimer.toggle();
             }
         });
+        gameTimer.setStatusChangedListener(this);
     }
 
     @Click(R.id.abort_button)
     protected void abortButtonClicked() {
-        gameTimer.pause();
+        gameTimer.stop();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -53,7 +57,7 @@ public class TimerActivity extends SherlockActivity {
                 .setPositiveButton(R.string.abort_dialog_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        gameTimer.pause();
+                        gameTimer.stop();
                     }
                 })
                 .setNegativeButton(R.string.abort_dialog_no, new DialogInterface.OnClickListener() {
@@ -63,5 +67,13 @@ public class TimerActivity extends SherlockActivity {
                     }
                 })
                 .show();
+    }
+
+    @Override
+    public void onTimerStatusChanged(GameTimer timer, boolean status) {
+        if (status)
+            abortButton.setVisibility(VISIBLE);
+        else
+            abortButton.setVisibility(GONE);
     }
 }
