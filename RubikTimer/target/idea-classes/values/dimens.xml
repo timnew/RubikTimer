@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="standard_margin">5dp</dimen>
-    <dimen name="timer_text_size">50sp</dimen>
-</resources>
