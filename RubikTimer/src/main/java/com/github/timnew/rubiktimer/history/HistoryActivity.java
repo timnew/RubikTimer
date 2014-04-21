@@ -1,9 +1,10 @@
 package com.github.timnew.rubiktimer.history;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.Bean;
-import com.googlecode.androidannotations.annotations.EActivity;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.EActivity;
 
 @EActivity
 public class HistoryActivity extends SherlockFragmentActivity {

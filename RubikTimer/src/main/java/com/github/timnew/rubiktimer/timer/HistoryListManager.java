@@ -9,12 +9,13 @@ import android.widget.TextView;
 
 import com.github.timnew.rubiktimer.R;
 import com.github.timnew.rubiktimer.history.HistoryActivity_;
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.Click;
-import com.googlecode.androidannotations.annotations.EBean;
-import com.googlecode.androidannotations.annotations.ItemClick;
-import com.googlecode.androidannotations.annotations.RootContext;
-import com.googlecode.androidannotations.annotations.ViewById;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.ItemClick;
+import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.ViewById;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;

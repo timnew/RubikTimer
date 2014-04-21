@@ -5,9 +5,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.github.timnew.rubiktimer.R;
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.EBean;
-import com.googlecode.androidannotations.annotations.ViewById;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.ViewById;
 
 import sun.plugin.dom.exception.InvalidStateException;
 

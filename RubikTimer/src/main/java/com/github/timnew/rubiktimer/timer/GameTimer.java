@@ -7,16 +7,18 @@ import android.widget.TextView;
 
 import com.github.timnew.rubiktimer.R;
 import com.github.timnew.rubiktimer.typefaces.KozGoProTypeface;
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.Bean;
-import com.googlecode.androidannotations.annotations.EBean;
-import com.googlecode.androidannotations.annotations.RootContext;
-import com.googlecode.androidannotations.annotations.ViewById;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.ViewById;
 
 import static android.os.Handler.Callback;
 import static android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
 
-@EBean
+@
+        EBean
 public class GameTimer {
 
     private static final int REFRESH_TIMER = 101;
