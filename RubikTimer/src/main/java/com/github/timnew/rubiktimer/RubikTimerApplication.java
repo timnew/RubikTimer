@@ -1,6 +1,7 @@
 package com.github.timnew.rubiktimer;
 
 import android.app.Application;
+
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 
@@ -11,5 +12,4 @@ public class RubikTimerApplication extends Application {
         ACRA.init(this);
         super.onCreate();
     }
-
 }

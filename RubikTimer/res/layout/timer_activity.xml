@@ -5,6 +5,7 @@
     tools:context=".TimerActivity_">
 
     <RelativeLayout
+        android:id="@+id/profile_section"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -24,9 +25,31 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/profile_icon"
+            android:text="TimNew"
             tools:text="TimNew" />
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_section"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/standard_margin">
+
+        <ListView
+            android:id="@+id/history_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/no_history_data_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/standard_margin"
+            android:text="@string/no_history_data" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/finger_left_button"

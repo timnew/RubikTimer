@@ -5,4 +5,5 @@
     <string name="abort_dialog_text">Abort will stop the timer and the time won\'t be stored.</string>
     <string name="abort_dialog_yes">Yes</string>
     <string name="abort_dialog_no">No</string>
+    <string name="no_history_data">No Historical Data Available</string>
 </resources>

@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.github.timnew.rubiktimer.R;
 import com.googlecode.androidannotations.annotations.AfterViews;
@@ -26,14 +24,17 @@ public class TimerActivity extends FragmentActivity implements OnTimerStatusChan
     @Bean
     protected GameTimer gameTimer;
 
+    @Bean
+    protected HistoryListManager historyListManager;
+
     @ViewById(R.id.abort_button)
     protected Button abortButton;
 
-    @ViewById(R.id.profile_icon)
-    protected ImageView profileIcon;
-
-    @ViewById(R.id.profile_name)
-    protected TextView profileName;
+//    @ViewById(R.id.profile_icon)
+//    protected ImageView profileIcon;
+//
+//    @ViewById(R.id.profile_name)
+//    protected TextView profileName;
 
     @AfterViews
     protected void afterViews() {
