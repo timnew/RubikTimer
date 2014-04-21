@@ -3,7 +3,6 @@ package com.github.timnew.rubiktimer.timer;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
-import android.os.PowerManager;
 import android.widget.TextView;
 
 import com.github.timnew.rubiktimer.R;
@@ -12,7 +11,6 @@ import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
-import com.googlecode.androidannotations.annotations.SystemService;
 import com.googlecode.androidannotations.annotations.ViewById;
 
 import static android.os.Handler.Callback;
@@ -20,16 +18,15 @@ import static android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
 
 @EBean
 public class GameTimer {
-    public static final int REFRESH_TIMER = 101;
+
+    private static final int REFRESH_TIMER = 101;
     private static final int UPDATE_INTERVAL = 10;
+
     @RootContext
     protected Activity activity;
 
     @Bean
     protected KozGoProTypeface typeface;
-
-    @SystemService
-    protected PowerManager powerManager;
 
     @ViewById(R.id.timer)
     protected TextView timerView;
