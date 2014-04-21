@@ -21,7 +21,7 @@ import static com.github.timnew.rubiktimer.timer.GameTimer.OnTimerStatusChangedL
 @EActivity(R.layout.timer_activity)
 public class TimerActivity extends FragmentActivity implements OnTimerStatusChangedListener {
     @Bean
-    protected TimerTriggerManager timerTriggerManager;
+    protected TimerTrigger timerTrigger;
 
     @Bean
     protected GameTimer gameTimer;
@@ -37,10 +37,15 @@ public class TimerActivity extends FragmentActivity implements OnTimerStatusChan
 
     @AfterViews
     protected void afterViews() {
-        timerTriggerManager.setTriggeredListener(new TimerTriggerManager.OnTimerTriggeredListener() {
+        timerTrigger.setTriggeredListener(new TimerTrigger.OnTimerTriggeredListener() {
             @Override
-            public void onTimerTriggered() {
-                gameTimer.toggle();
+            public void startTimer() {
+                gameTimer.restart();
+            }
+
+            @Override
+            public void stopTimer() {
+                gameTimer.stop();
             }
         });
         gameTimer.setStatusChangedListener(this);

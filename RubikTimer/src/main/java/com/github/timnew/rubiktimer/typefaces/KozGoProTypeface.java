@@ -7,8 +7,9 @@ import android.widget.TextView;
 import com.googlecode.androidannotations.annotations.AfterInject;
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
+import com.googlecode.androidannotations.api.Scope;
 
-@EBean
+@EBean(scope = Scope.Singleton)
 public class KozGoProTypeface {
     private static final String FONT_PATH = "fonts/KozGoPro-ExtraLight.otf";
 

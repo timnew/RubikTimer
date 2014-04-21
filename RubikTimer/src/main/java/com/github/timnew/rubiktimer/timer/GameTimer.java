@@ -61,13 +61,6 @@ public class GameTimer {
         refresh();
     }
 
-    public void toggle() {
-        if (isTiming)
-            stop();
-        else
-            restart();
-    }
-
     public void restart() {
         totalTime = 0;
         refresh();
@@ -134,6 +127,10 @@ public class GameTimer {
 
     public void setStatusChangedListener(OnTimerStatusChangedListener statusChangedListener) {
         this.statusChangedListener = statusChangedListener;
+    }
+
+    public boolean isTiming() {
+        return isTiming;
     }
 
     public static interface OnTimerStatusChangedListener {
