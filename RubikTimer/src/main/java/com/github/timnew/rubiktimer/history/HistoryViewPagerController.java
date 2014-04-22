@@ -26,7 +26,7 @@ import static com.google.common.collect.Iterables.filter;
 import static java.util.Arrays.asList;
 
 @EBean
-public class HistoryViewPagerManager extends FragmentPagerAdapter
+public class HistoryViewPagerController extends FragmentPagerAdapter
         implements OnPageChangeListener, TabListener {
 
     @ViewById(R.id.view_pager)
@@ -38,7 +38,7 @@ public class HistoryViewPagerManager extends FragmentPagerAdapter
     private ActionBar actionBar;
     private List<HistoryTabs> tabs = new ArrayList<HistoryTabs>();
 
-    public HistoryViewPagerManager(Context sherlockFragmentActivity) {
+    public HistoryViewPagerController(Context sherlockFragmentActivity) {
         super(((SherlockFragmentActivity) sherlockFragmentActivity).getSupportFragmentManager());
     }
 

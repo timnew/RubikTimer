@@ -15,7 +15,7 @@ import sun.plugin.dom.exception.InvalidStateException;
 import static java.lang.String.format;
 
 @EBean
-public class TimerTrigger {
+public class TimerTriggerController {
 
     @ViewById(R.id.finger_left_button)
     protected Button leftButton;

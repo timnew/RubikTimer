@@ -20,20 +20,20 @@ import static com.github.timnew.rubiktimer.timer.GameTimer.OnTimerStatusChangedL
 @EActivity(R.layout.timer_activity)
 public class TimerActivity extends FragmentActivity implements OnTimerStatusChangedListener {
     @Bean
-    protected TimerTrigger timerTrigger;
+    protected TimerTriggerController timerTrigger;
 
     @Bean
     protected GameTimer gameTimer;
 
     @Bean
-    protected HistoryListManager historyListManager;
+    protected HistoryListController historyListController;
 
     @ViewById(R.id.abort_button)
     protected Button abortButton;
 
     @AfterViews
     protected void afterViews() {
-        timerTrigger.setTriggeredListener(new TimerTrigger.OnTimerTriggeredListener() {
+        timerTrigger.setTriggeredListener(new TimerTriggerController.OnTimerTriggeredListener() {
             @Override
             public void startTimer() {
                 gameTimer.restart();
@@ -42,7 +42,7 @@ public class TimerActivity extends FragmentActivity implements OnTimerStatusChan
             @Override
             public void stopTimer() {
                 gameTimer.stop();
-                historyListManager.addToHistory(gameTimer.currentTime());
+                historyListController.addToHistory(gameTimer.currentTime());
             }
         });
         gameTimer.setStatusChangedListener(this);
