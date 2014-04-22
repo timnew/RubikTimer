@@ -37,7 +37,7 @@ public class TimeRecordRepository {
 
     public CloseableIterator<TimeRecord> localTimeRecordByTime() {
         try {
-            return timeRecordDao.queryBuilder().orderBy("time", false).iterator();
+            return timeRecordDao.queryBuilder().orderBy("time", true).iterator();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);

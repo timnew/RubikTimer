@@ -14,12 +14,13 @@ public class User {
     @DatabaseField(canBeNull = false)
     private String name;
 
-    @ForeignCollectionField(orderColumnName = "time", orderAscending = false)
+    @ForeignCollectionField(orderColumnName = "time", orderAscending = true)
     private ForeignCollection<TimeRecord> recordsByTime;
 
     @ForeignCollectionField(orderColumnName = "createdAt", orderAscending = false)
     private ForeignCollection<TimeRecord> recordsByCreateTime;
 
+    @SuppressWarnings("UnusedDeclaration")
     User() {
     }
 
