@@ -34,6 +34,7 @@ public class HistoryListFragment extends ListFragment {
     protected HistoryListProvider dataProvider;
 
     protected List<TimeRecord> items = new ArrayList<TimeRecord>();
+
     private HistoryItemAdapter adapter;
 
     @AfterViews

@@ -33,19 +33,16 @@ import static com.google.common.collect.Iterables.limit;
 @EBean
 public class HistoryListManager extends BaseAdapter {
 
+    public static final int HISTORY_LIST_SIZE = 3;
+    protected List<TimeRecord> timeRecords = new ArrayList<TimeRecord>(HISTORY_LIST_SIZE);
     @RootContext
     protected Activity activity;
-
     @Bean
     protected TimeRecordRepository timeRecordRepository;
-
     @ViewById(R.id.history_list)
     protected ListView historyList; //TODO replace this with a raw layout view for better animation
-
     @ViewById(R.id.no_history_data_message)
     protected TextView noHistoryMessageView;
-
-    protected List<TimeRecord> timeRecords = new ArrayList<TimeRecord>(3);
 
     @AfterViews
     protected void afterViews() {
@@ -120,7 +117,8 @@ public class HistoryListManager extends BaseAdapter {
             collection.refreshCollection();
 
             timeRecords.clear();
-            addAll(timeRecords, limit(collection, 3));
+
+            addAll(timeRecords, limit(collection, HISTORY_LIST_SIZE));
 
             collection.closeLastIterator();
 
