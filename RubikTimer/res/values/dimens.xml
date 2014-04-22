@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="standard_margin">5dp</dimen>
-    <dimen name="standard_padding">5dp</dimen>
+    <dimen name="standard_margin">10dp</dimen>
+    <dimen name="standard_padding">10dp</dimen>
     <dimen name="timer_text_size">50sp</dimen>
+    <dimen name="finger_button_padding">30dp</dimen>
+    <dimen name="profile_name_size">30sp</dimen>
 
 </resources>

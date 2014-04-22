@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/standard_margin"
     tools:context=".TimerActivity_">
 
     <RelativeLayout
@@ -25,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/profile_icon"
-            android:text="TimNew"
+            android:textSize="30sp"
             tools:text="TimNew" />
 
     </RelativeLayout>
@@ -59,8 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_margin="@dimen/standard_margin"
-        android:background="@drawable/finger_left_button" />
+        android:background="@drawable/finger_left_button"
+        android:padding="@dimen/finger_button_padding" />
 
     <Button
         android:id="@+id/finger_right_button"
@@ -68,8 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_margin="@dimen/standard_margin"
-        android:background="@drawable/figer_right_button" />
+        android:background="@drawable/figer_right_button"
+        android:padding="@dimen/finger_button_padding" />
 
     <TextView
         android:id="@+id/timer"
@@ -77,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:padding="@dimen/standard_padding"
         android:textSize="@dimen/timer_text_size"
         tools:text="10:00.000" />
 
@@ -86,8 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/standard_margin"
         android:background="@drawable/abort_button"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 </RelativeLayout>
