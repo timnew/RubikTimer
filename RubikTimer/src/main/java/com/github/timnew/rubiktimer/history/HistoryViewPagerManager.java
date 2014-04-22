@@ -48,7 +48,6 @@ public class HistoryViewPagerManager extends FragmentPagerAdapter
         viewPager.setOnPageChangeListener(this);
 
         actionBar = activity.getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         updateTabs();
     }
@@ -94,6 +93,19 @@ public class HistoryViewPagerManager extends FragmentPagerAdapter
         addAll(tabs, visibleTabs);
 
         notifyDataSetChanged();
+
+        buildTabs();
+    }
+
+    private void buildTabs() {
+        actionBar.removeAllTabs();
+
+        for (HistoryTabs historyTab : tabs) {
+            ActionBar.Tab tab = actionBar.newTab();
+            tab.setText(historyTab.getTitle());
+            tab.setTabListener(this);
+            actionBar.addTab(tab);
+        }
     }
 
     @Override
