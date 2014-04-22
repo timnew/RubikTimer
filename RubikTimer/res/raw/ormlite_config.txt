@@ -1,0 +1,56 @@
+#
+# generated on 2014/04/22 05:16:13
+#
+# --table-start--
+dataClass=com.github.timnew.rubiktimer.domain.TimeRecord
+tableName=timeRecords
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=time
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=createdAt
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=user
+canBeNull=false
+foreign=true
+indexName=timeRecords_user_idx
+foreignAutoRefresh=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.github.timnew.rubiktimer.domain.User
+tableName=users
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=recordsByTime
+foreignCollection=true
+foreignCollectionOrderColumnName=time
+foreignCollectionOrderAscending=false
+# --field-end--
+# --field-start--
+fieldName=recordsByCreateTime
+foreignCollection=true
+foreignCollectionOrderColumnName=createdAt
+foreignCollectionOrderAscending=false
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

@@ -16,9 +16,9 @@ import org.androidannotations.annotations.ViewById;
 
 import static android.os.Handler.Callback;
 import static android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+import static com.github.timnew.rubiktimer.domain.TimeRecord.formartTime;
 
-@
-        EBean
+@EBean
 public class GameTimer {
 
     private static final int REFRESH_TIMER = 101;
@@ -107,13 +107,8 @@ public class GameTimer {
     }
 
     public void refresh() {
-        long seconds = totalTime / 1000;
-        long min = seconds / 60;
-        seconds %= 60;
-        long milli = totalTime % 1000;
-
-        String timeText = String.format("%02d:%02d.%03d", min, seconds, milli);
-        timerView.setText(timeText);
+        String text = formartTime(totalTime);
+        timerView.setText(text);
     }
 
     private void onStatusChanged() {
@@ -133,6 +128,10 @@ public class GameTimer {
 
     public boolean isTiming() {
         return isTiming;
+    }
+
+    public long currentTime() {
+        return totalTime;
     }
 
     public static interface OnTimerStatusChangedListener {

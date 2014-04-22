@@ -9,7 +9,7 @@ import org.androidannotations.annotations.EActivity;
 @EActivity
 public class HistoryActivity extends SherlockFragmentActivity {
     @Bean
-    protected HistoryViewPagerAdapter viewPagerAdapter;
+    protected HistoryViewPagerManager historyViewPagerManager;
 
     @AfterViews
     protected void afterViews() {

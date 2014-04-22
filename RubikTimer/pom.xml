@@ -23,6 +23,8 @@
         <android.version>4.1.1.4</android.version>
         <acra.version>4.4.0</acra.version>
         <guava.version>13.0.1</guava.version>
+        <ormlite.version>4.48</ormlite.version>
+        <joda-time.version>2.3</joda-time.version>
     </properties>
 
     <dependencies>
@@ -65,6 +67,16 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.j256.ormlite</groupId>
+            <artifactId>ormlite-android</artifactId>
+            <version>${ormlite.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
         </dependency>
     </dependencies>
 

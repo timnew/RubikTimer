@@ -31,12 +31,6 @@ public class TimerActivity extends FragmentActivity implements OnTimerStatusChan
     @ViewById(R.id.abort_button)
     protected Button abortButton;
 
-//    @ViewById(R.id.profile_icon)
-//    protected ImageView profileIcon;
-//
-//    @ViewById(R.id.profile_name)
-//    protected TextView profileName;
-
     @AfterViews
     protected void afterViews() {
         timerTrigger.setTriggeredListener(new TimerTrigger.OnTimerTriggeredListener() {
@@ -48,6 +42,7 @@ public class TimerActivity extends FragmentActivity implements OnTimerStatusChan
             @Override
             public void stopTimer() {
                 gameTimer.stop();
+                historyListManager.addToHistory(gameTimer.currentTime());
             }
         });
         gameTimer.setStatusChangedListener(this);
