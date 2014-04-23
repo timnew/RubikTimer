@@ -1,5 +1,5 @@
 #
-# generated on 2014/04/22 05:16:13
+# generated on 2014/04/23 06:03:57
 #
 # --table-start--
 dataClass=com.github.timnew.rubiktimer.domain.TimeRecord
@@ -18,18 +18,18 @@ fieldName=createdAt
 canBeNull=false
 # --field-end--
 # --field-start--
-fieldName=user
+fieldName=profile
 canBeNull=false
 foreign=true
-indexName=timeRecords_user_idx
+indexName=timeRecords_profile_idx
 foreignAutoRefresh=true
 # --field-end--
 # --table-fields-end--
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.github.timnew.rubiktimer.domain.User
-tableName=users
+dataClass=com.github.timnew.rubiktimer.domain.Profile
+tableName=profiles
 # --table-fields-start--
 # --field-start--
 fieldName=id
@@ -43,7 +43,6 @@ canBeNull=false
 fieldName=recordsByTime
 foreignCollection=true
 foreignCollectionOrderColumnName=time
-foreignCollectionOrderAscending=false
 # --field-end--
 # --field-start--
 fieldName=recordsByCreateTime

@@ -89,6 +89,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/abort_button"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
 </RelativeLayout>

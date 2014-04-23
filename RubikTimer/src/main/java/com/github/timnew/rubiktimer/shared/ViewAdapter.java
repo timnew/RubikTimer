@@ -13,9 +13,22 @@ public abstract class ViewAdapter<T, TView extends View> extends BaseAdapter {
 
     protected List<T> items;
 
+    protected ViewAdapter(Context context) {
+        this(context, null);
+    }
+
+    protected ViewAdapter(Context context, List<T> items) {
+        this.context = context;
+        this.items = items;
+    }
+
     public void setItems(List<T> items) {
         this.items = items;
         notifyDataSetChanged();
+    }
+
+    public int indexOf(T item) {
+        return items.indexOf(item);
     }
 
     @Override
@@ -43,6 +56,7 @@ public abstract class ViewAdapter<T, TView extends View> extends BaseAdapter {
         if (convertView == null) {
             view = createView();
         } else {
+            //noinspection unchecked
             view = (TView) convertView;
         }
 

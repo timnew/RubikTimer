@@ -20,19 +20,20 @@ public class TimeRecord {
     private DateTime createdAt;
 
     @DatabaseField(canBeNull = false, index = true, foreign = true, foreignAutoRefresh = true)
-    private User user;
+    private Profile profile;
 
-    public TimeRecord(User user, long time, DateTime createdAt) {
-        this.user = user;
+    public TimeRecord(Profile profile, long time, DateTime createdAt) {
+        this.profile = profile;
         this.time = time;
         this.createdAt = createdAt;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     TimeRecord() {
     }
 
-    public TimeRecord(User user, long time) {
-        this(user, time, DateTime.now());
+    public TimeRecord(Profile profile, long time) {
+        this(profile, time, DateTime.now());
     }
 
     public static String formartTime(long time) {
@@ -56,7 +57,7 @@ public class TimeRecord {
         return createdAt;
     }
 
-    public User getUser() {
-        return user;
+    public Profile getProfile() {
+        return profile;
     }
 }

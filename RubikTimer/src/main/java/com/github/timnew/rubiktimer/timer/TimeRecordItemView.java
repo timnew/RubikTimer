@@ -13,29 +13,29 @@ import org.androidannotations.annotations.ViewById;
 
 import static com.github.timnew.rubiktimer.domain.TimeRecord.formartTime;
 
-@EViewGroup(R.layout.record_view)
-public class RecordView extends RelativeLayout {
+@EViewGroup(R.layout.time_record_item_view)
+public class TimeRecordItemView extends RelativeLayout {
 
-    @ViewById(R.id.user)
-    protected TextView userView;
+    @ViewById(R.id.profile)
+    protected TextView profileView;
 
     @ViewById(R.id.time)
     protected TextView timeView;
 
-    public RecordView(Context context) {
+    public TimeRecordItemView(Context context) {
         super(context);
     }
 
-    public RecordView(Context context, AttributeSet attrs) {
+    public TimeRecordItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public RecordView(Context context, AttributeSet attrs, int defStyle) {
+    public TimeRecordItemView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
     public void updateView(TimeRecord timeRecord) {
-        userView.setText(timeRecord.getUser().getName());
+        profileView.setText(timeRecord.getProfile().getName());
         timeView.setText(formartTime(timeRecord.getTime()));
     }
 }

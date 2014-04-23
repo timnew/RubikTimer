@@ -1,7 +1,7 @@
 package com.github.timnew.rubiktimer.database;
 
+import com.github.timnew.rubiktimer.domain.Profile;
 import com.github.timnew.rubiktimer.domain.TimeRecord;
-import com.github.timnew.rubiktimer.domain.User;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
@@ -18,21 +18,21 @@ import static org.androidannotations.annotations.EBean.Scope.Singleton;
 public class TimeRecordRepository {
 
     @Bean
-    protected UserRepository userRepository;
+    protected ProfileRepository profileRepository;
 
     @OrmLiteDao(helper = DatabaseHelper.class, model = TimeRecord.class)
     protected RuntimeExceptionDao<TimeRecord, Integer> timeRecordDao;
 
-    private User currentUser() {
-        return userRepository.currentUser();
+    private Profile currentProfile() {
+        return profileRepository.currentProfile();
     }
 
     public ForeignCollection<TimeRecord> currentUserTimeRecordsByTime() {
-        return currentUser().getRecordsByTime();
+        return currentProfile().getRecordsByTime();
     }
 
     public ForeignCollection<TimeRecord> currentUserTimeRecordByCreationTime() {
-        return currentUser().getRecordsByCreationTime();
+        return currentProfile().getRecordsByCreationTime();
     }
 
     public CloseableIterator<TimeRecord> localTimeRecordByTime() {
@@ -54,7 +54,7 @@ public class TimeRecordRepository {
     }
 
     public TimeRecord addRecord(long time) {
-        TimeRecord record = new TimeRecord(currentUser(), time);
+        TimeRecord record = new TimeRecord(currentProfile(), time);
         timeRecordDao.create(record);
         return record;
     }

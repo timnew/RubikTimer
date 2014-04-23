@@ -4,10 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.github.timnew.rubiktimer.R;
+import com.github.timnew.rubiktimer.domain.Profile;
 import com.github.timnew.rubiktimer.domain.TimeRecord;
-import com.github.timnew.rubiktimer.domain.User;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         try {
-            createTable(connectionSource, User.class);
+            createTable(connectionSource, Profile.class);
             createTable(connectionSource, TimeRecord.class);
 
             insertInitData();
@@ -36,10 +36,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
-    private void insertInitData() throws SQLException {
-        Dao<User, Integer> userDao = this.getDao(User.class);
-        User timNew = new User("TimNew");
-        userDao.create(timNew);
+    private void insertInitData() {
+        RuntimeExceptionDao<Profile, Integer> profileDao = this.getRuntimeExceptionDao(Profile.class);
+
+        Profile timNew = new Profile("TimNew");
+        profileDao.create(timNew);
+
+        Profile anonymous = new Profile("anonymous");
+        profileDao.create(anonymous);
     }
 
     @Override

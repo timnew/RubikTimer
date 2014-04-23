@@ -67,12 +67,12 @@ public class HistoryListController extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        RecordView view;
+        TimeRecordItemView view;
 
         if (convertView == null) {
-            view = RecordView_.build(activity);
+            view = TimeRecordItemView_.build(activity);
         } else {
-            view = (RecordView) convertView;
+            view = (TimeRecordItemView) convertView;
         }
 
         TimeRecord timeRecord = getItem(position);

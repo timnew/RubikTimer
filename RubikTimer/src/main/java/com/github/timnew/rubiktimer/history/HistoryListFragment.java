@@ -7,8 +7,8 @@ import com.github.timnew.rubiktimer.R;
 import com.github.timnew.rubiktimer.database.TimeRecordRepository;
 import com.github.timnew.rubiktimer.domain.TimeRecord;
 import com.github.timnew.rubiktimer.shared.ViewAdapter;
-import com.github.timnew.rubiktimer.timer.RecordView;
-import com.github.timnew.rubiktimer.timer.RecordView_;
+import com.github.timnew.rubiktimer.timer.TimeRecordItemView;
+import com.github.timnew.rubiktimer.timer.TimeRecordItemView_;
 import com.j256.ormlite.dao.CloseableIterator;
 
 import org.androidannotations.annotations.AfterViews;
@@ -67,20 +67,18 @@ public class HistoryListFragment extends ListFragment {
         CloseableIterator<TimeRecord> getIterator(TimeRecordRepository repository);
     }
 
-    public static class HistoryItemAdapter extends ViewAdapter<TimeRecord, RecordView> {
+    public static class HistoryItemAdapter extends ViewAdapter<TimeRecord, TimeRecordItemView> {
         public HistoryItemAdapter(Context context, List<TimeRecord> items) {
-            this.context = context;
-
-            setItems(items);
+            super(context, items);
         }
 
         @Override
-        protected RecordView createView() {
-            return RecordView_.build(context);
+        protected TimeRecordItemView createView() {
+            return TimeRecordItemView_.build(context);
         }
 
         @Override
-        protected void updateView(RecordView view, TimeRecord item) {
+        protected void updateView(TimeRecordItemView view, TimeRecord item) {
             view.updateView(item);
         }
     }

@@ -5,8 +5,8 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "users")
-public class User {
+@DatabaseTable(tableName = "profiles")
+public class Profile {
 
     @DatabaseField(generatedId = true)
     private int id;
@@ -21,10 +21,10 @@ public class User {
     private ForeignCollection<TimeRecord> recordsByCreateTime;
 
     @SuppressWarnings("UnusedDeclaration")
-    User() {
+    Profile() {
     }
 
-    public User(String name) {
+    public Profile(String name) {
         this.name = name;
     }
 

@@ -28,6 +28,9 @@ public class TimerActivity extends FragmentActivity implements OnTimerStatusChan
     @Bean
     protected HistoryListController historyListController;
 
+    @Bean
+    protected ProfileController profileController;
+
     @ViewById(R.id.abort_button)
     protected Button abortButton;
 

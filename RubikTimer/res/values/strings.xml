@@ -12,4 +12,8 @@
     <string name="tab_local_time">Local Timeline</string>
     <string name="tab_local_best">Local Best</string>
     <string name="tab_global_best">Global Best</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="profile_picker_title">Select Profile</string>
 </resources>
