@@ -47,10 +47,19 @@ public class TimerActivity extends FragmentActivity implements OnTimerStatusChan
                 gameTimer.stop();
 
                 profileController.currentActiveProfile().addRecord(gameTimer.currentTime()); // TODO currentActiveProfile concept looks overcomplicated
-                historyListController.refreshData();
+                historyListController.refresh();
             }
         });
         gameTimer.setStatusChangedListener(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        gameTimer.refresh();
+        historyListController.refresh();
+        profileController.refresh();
     }
 
     @Click(R.id.abort_button)
@@ -83,4 +92,5 @@ public class TimerActivity extends FragmentActivity implements OnTimerStatusChan
         else
             abortButton.setVisibility(GONE);
     }
+
 }

@@ -48,8 +48,6 @@ public class HistoryViewPagerController extends FragmentPagerAdapter
         viewPager.setOnPageChangeListener(this);
 
         actionBar = activity.getSupportActionBar();
-
-        updateTabs();
     }
 
     @Override

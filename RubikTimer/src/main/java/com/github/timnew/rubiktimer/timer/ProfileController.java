@@ -10,7 +10,6 @@ import com.github.timnew.rubiktimer.database.ProfileRepository;
 import com.github.timnew.rubiktimer.domain.Profile;
 import com.github.timnew.rubiktimer.profile.RenameProfileDialog_;
 
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
@@ -36,16 +35,11 @@ public class ProfileController {
     @Bean
     protected ProfileRepository profileRepository;
 
-    @AfterViews
-    protected void afterViews() {
-        refreshView();
-    }
-
     public Profile currentActiveProfile() {
         return profileRepository.currentActiveProfile();
     }
 
-    public void refreshView() {
+    public void refresh() {
         Profile currentProfile = profileRepository.currentActiveProfile();
         profileName.setText(currentProfile.getName());
     }
@@ -58,7 +52,7 @@ public class ProfileController {
     @CheckedChange(R.id.profile_icon)
     protected void profileToggled(CompoundButton button, boolean checked) {
         profileRepository.setAnonymousMode(!checked);
-        refreshView();
+        refresh();
     }
 
     @LongClick(R.id.profile_section)
@@ -69,7 +63,7 @@ public class ProfileController {
                 .show(activity.getSupportFragmentManager(), new OnProfileRenamedListener() {
                     @Override
                     public void onProfileRenamed(Profile profile) {
-                        refreshView();
+                        refresh();
                     }
                 });
     }

@@ -56,7 +56,6 @@ public class HistoryListController extends ViewAdapter<TimeRecord, TimerTimeReco
     protected void afterViews() {
         isAfterView = true;
         historyList.setAdapter(this);
-        refreshData();
     }
 
     @Override
@@ -100,7 +99,7 @@ public class HistoryListController extends ViewAdapter<TimeRecord, TimerTimeReco
         HistoryActivity_.intent(activity).start();
     }
 
-    public void refreshData() {
+    public void refresh() {
         List<TimeRecord> items = getItems();
         try {
             ForeignCollection<TimeRecord> collection = timeRecordRepository.currentUserTimeRecordByCreationTime();

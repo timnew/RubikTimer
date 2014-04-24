@@ -59,8 +59,6 @@ public class GameTimer {
                 return true;
             }
         });
-
-        refresh();
     }
 
     public void restart() {
