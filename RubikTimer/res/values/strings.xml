@@ -15,6 +15,8 @@
 
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="profile_picker_title">Select Profile</string>
-    <string name="undo_delete_hint">Click to undo delete...</string>
+
+    <string name="rename_profile">Rename Profile</string>
+    <string name="rename">Rename</string>
+    <string name="profile_name">Profile Name</string>
 </resources>

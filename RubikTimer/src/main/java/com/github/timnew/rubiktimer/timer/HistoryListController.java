@@ -11,6 +11,8 @@ import com.github.timnew.rubiktimer.R;
 import com.github.timnew.rubiktimer.database.TimeRecordRepository;
 import com.github.timnew.rubiktimer.domain.TimeRecord;
 import com.github.timnew.rubiktimer.history.HistoryActivity_;
+import com.github.timnew.rubiktimer.history.TimeRecordItemView;
+import com.github.timnew.rubiktimer.history.TimeRecordItemView_;
 import com.j256.ormlite.dao.ForeignCollection;
 
 import org.androidannotations.annotations.AfterViews;
@@ -34,6 +36,7 @@ import static com.google.common.collect.Iterables.limit;
 public class HistoryListController extends BaseAdapter {
 
     public static final int HISTORY_LIST_SIZE = 3;
+
     protected List<TimeRecord> timeRecords = new ArrayList<TimeRecord>(HISTORY_LIST_SIZE);
 
     @RootContext
@@ -71,6 +74,7 @@ public class HistoryListController extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         TimeRecordItemView view;
 
         if (convertView == null) {

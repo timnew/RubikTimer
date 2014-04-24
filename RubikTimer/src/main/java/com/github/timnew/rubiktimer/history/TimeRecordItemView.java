@@ -1,4 +1,4 @@
-package com.github.timnew.rubiktimer.timer;
+package com.github.timnew.rubiktimer.history;
 
 import android.content.Context;
 import android.util.AttributeSet;

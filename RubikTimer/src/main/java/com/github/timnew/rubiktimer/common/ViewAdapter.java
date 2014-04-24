@@ -1,4 +1,4 @@
-package com.github.timnew.rubiktimer.shared;
+package com.github.timnew.rubiktimer.common;
 
 import android.content.Context;
 import android.view.View;

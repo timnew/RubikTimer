@@ -4,11 +4,9 @@ import android.content.Context;
 import android.support.v4.app.ListFragment;
 
 import com.github.timnew.rubiktimer.R;
+import com.github.timnew.rubiktimer.common.ViewAdapter;
 import com.github.timnew.rubiktimer.database.TimeRecordRepository;
 import com.github.timnew.rubiktimer.domain.TimeRecord;
-import com.github.timnew.rubiktimer.shared.ViewAdapter;
-import com.github.timnew.rubiktimer.timer.TimeRecordItemView;
-import com.github.timnew.rubiktimer.timer.TimeRecordItemView_;
 import com.j256.ormlite.dao.CloseableIterator;
 
 import org.androidannotations.annotations.AfterViews;
