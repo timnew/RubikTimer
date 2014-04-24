@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppTheme" parent="@style/Theme.Sherlock.Light" />
+
+    <style name="ImageToggleButton">
+        <item name="android:textOff">@null</item>
+        <item name="android:textOn">@null</item>
+    </style>
 </resources>

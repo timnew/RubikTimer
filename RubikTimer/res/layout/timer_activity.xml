@@ -12,13 +12,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/standard_margin">
 
-        <ImageView
+        <ToggleButton
             android:id="@+id/profile_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/ImageToggleButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_profile" />
+            android:background="@drawable/profile_icon"
+            android:checked="true" />
 
         <TextView
             android:id="@+id/profile_name"

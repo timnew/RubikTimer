@@ -32,7 +32,7 @@ public class ProfilePickerDialog extends DialogFragment {
         profilePickerView.setProfilePickedListener(new OnProfilePickedListener() {
             @Override
             public void onProfilePicked(Profile profile) {
-                profileRepository.activeUser(profile);
+                profileRepository.activeProfile(profile);
 
                 dismiss();
 

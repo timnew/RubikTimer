@@ -35,12 +35,16 @@ public class HistoryListController extends BaseAdapter {
 
     public static final int HISTORY_LIST_SIZE = 3;
     protected List<TimeRecord> timeRecords = new ArrayList<TimeRecord>(HISTORY_LIST_SIZE);
+
     @RootContext
     protected Activity activity;
+
     @Bean
     protected TimeRecordRepository timeRecordRepository;
+
     @ViewById(R.id.history_list)
     protected ListView historyList; //TODO replace this with a raw layout view for better animation
+
     @ViewById(R.id.no_history_data_message)
     protected TextView noHistoryMessageView;
 
@@ -104,13 +108,7 @@ public class HistoryListController extends BaseAdapter {
         HistoryActivity_.intent(activity).start();
     }
 
-    public TimeRecord addToHistory(long time) {
-        TimeRecord timeRecord = timeRecordRepository.addRecord(time);
-        refreshData();
-        return timeRecord;
-    }
-
-    private void refreshData() {
+    public void refreshData() {
         try {
             ForeignCollection<TimeRecord> collection = timeRecordRepository.currentUserTimeRecordByCreationTime();
 

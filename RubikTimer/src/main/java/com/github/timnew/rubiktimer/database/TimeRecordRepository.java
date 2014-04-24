@@ -52,10 +52,4 @@ public class TimeRecordRepository {
             throw new RuntimeException(e);
         }
     }
-
-    public TimeRecord addRecord(long time) {
-        TimeRecord record = new TimeRecord(currentProfile(), time);
-        timeRecordDao.create(record);
-        return record;
-    }
 }

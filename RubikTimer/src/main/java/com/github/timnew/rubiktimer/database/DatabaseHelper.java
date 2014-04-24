@@ -41,9 +41,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         Profile timNew = new Profile("TimNew");
         profileDao.create(timNew);
-
-        Profile anonymous = new Profile("anonymous");
-        profileDao.create(anonymous);
     }
 
     @Override

@@ -23,6 +23,7 @@ public class ProfileRepository {
     protected RuntimeExceptionDao<Profile, Integer> profileDao;
 
     private Profile currentProfile;
+    private boolean anonymousMode;
 
     private void initCurrentProfile() {
         Profile currentProfile;
@@ -40,11 +41,10 @@ public class ProfileRepository {
         }
 
         if (currentProfile == null) {
-            newProfile("anonymous");
-            return;
+            currentProfile = Profile.ANONYMOUS;
         }
 
-        activeUser(currentProfile);
+        activeProfile(currentProfile);
     }
 
     private void saveProfile() {
@@ -54,6 +54,25 @@ public class ProfileRepository {
     public Profile currentProfile() {
         if (currentProfile == null)
             initCurrentProfile();
+
+        return currentProfile;
+    }
+
+    public Profile currentActiveProfile() {
+        return anonymousMode ? Profile.ANONYMOUS : currentProfile();
+    }
+
+    public boolean isAnonymousMode() {
+        return anonymousMode;
+    }
+
+    public void setAnonymousMode(boolean anonymousMode) {
+        this.anonymousMode = anonymousMode;
+    }
+
+    public Profile activeProfile(Profile currentProfile) {
+        this.currentProfile = currentProfile;
+        appSettings.currentUserId().put(currentProfile.getId());
         return currentProfile;
     }
 
@@ -64,7 +83,7 @@ public class ProfileRepository {
 
     public Profile newProfile(String name) {
         Profile profile = new Profile(name);
-        activeUser(profile);
+        activeProfile(profile);
         saveProfile();
 
         return profile;
@@ -75,11 +94,9 @@ public class ProfileRepository {
     }
 
     public Profile profileWithId(int id) {
-        return profileDao.queryForId(id);
-    }
+        if (id == Profile.ANONYMOUS.getId())
+            return Profile.ANONYMOUS;
 
-    public void activeUser(Profile currentProfile) {
-        this.currentProfile = currentProfile;
-        appSettings.currentUserId().put(currentProfile.getId());
+        return profileDao.queryForId(id);
     }
 }

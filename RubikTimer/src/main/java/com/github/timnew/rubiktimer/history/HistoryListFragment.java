@@ -17,7 +17,6 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,12 +54,7 @@ public class HistoryListFragment extends ListFragment {
 
         adapter.notifyDataSetChanged();
 
-        try {
-            iterator.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        iterator.closeQuietly();
     }
 
     public static interface HistoryListProvider extends Serializable {
