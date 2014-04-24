@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/standard_margin">
+        android:padding="@dimen/standard_padding">
 
-        <ToggleButton
+    <ToggleButton
             android:id="@+id/profile_icon"
             style="@style/ImageToggleButton"
             android:layout_width="50dp"
@@ -34,29 +34,6 @@
             tools:text="TimNew" />
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_section"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/standard_margin">
-
-        <ListView
-            android:id="@+id/history_list"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:animateLayoutChanges="true"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/no_history_data_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/standard_margin"
-            android:text="@string/no_history_data" />
-    </LinearLayout>
 
     <Button
         android:id="@+id/finger_left_button"
@@ -80,11 +57,35 @@
         android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/profile_section"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
         android:padding="@dimen/standard_padding"
         android:textSize="@dimen/timer_text_size"
         tools:text="10:00.000" />
+
+    <LinearLayout
+        android:id="@+id/history_section"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="@dimen/standard_padding">
+
+        <ListView
+            android:id="@+id/history_list"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:animateLayoutChanges="true"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/no_history_data_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_history_data" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/abort_button"

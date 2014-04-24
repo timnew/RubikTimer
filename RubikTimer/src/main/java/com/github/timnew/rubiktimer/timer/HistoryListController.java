@@ -35,7 +35,7 @@ import static com.google.common.collect.Iterables.limit;
 @EBean
 public class HistoryListController extends BaseAdapter {
 
-    public static final int HISTORY_LIST_SIZE = 3;
+    public static final int HISTORY_LIST_SIZE = 5;
 
     protected List<TimeRecord> timeRecords = new ArrayList<TimeRecord>(HISTORY_LIST_SIZE);
 
