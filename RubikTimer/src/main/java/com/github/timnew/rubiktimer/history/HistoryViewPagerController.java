@@ -84,7 +84,7 @@ public class HistoryViewPagerController extends FragmentPagerAdapter
         Iterable<HistoryTabs> visibleTabs = filter(asList(HistoryTabs.values()), new Predicate<HistoryTabs>() {
             @Override
             public boolean apply(HistoryTabs input) {
-                return input.shouldShow();
+                return input.shouldShow(activity);
             }
         });
 

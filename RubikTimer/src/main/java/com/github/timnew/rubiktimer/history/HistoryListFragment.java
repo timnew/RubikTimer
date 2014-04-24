@@ -12,8 +12,6 @@ import com.github.timnew.rubiktimer.database.ProfileRepository;
 import com.github.timnew.rubiktimer.database.TimeRecordRepository;
 import com.github.timnew.rubiktimer.domain.Profile;
 import com.github.timnew.rubiktimer.domain.TimeRecord;
-import com.google.common.base.Function;
-import com.j256.ormlite.dao.CloseableIterator;
 import com.nhaarman.listviewanimations.itemmanipulation.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.contextualundo.ContextualUndoAdapter;
@@ -28,15 +26,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.collect.Iterables.transform;
-import static com.google.common.collect.Iterators.addAll;
-import static com.google.common.collect.Iterators.limit;
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.primitives.Ints.asList;
+import static com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.contextualundo.ContextualUndoAdapter.DeleteItemCallback;
 
 @EFragment(R.layout.history_list_fragment)
-public class HistoryListFragment extends ListFragment {
+public class HistoryListFragment extends ListFragment implements OnDismissCallback, DeleteItemCallback {
 
+    public static final int MAX_ITEM_COUNT = 10;
+    public static final int DELETE_DELAY_TIME = 1000;
     @Bean
     protected TimeRecordRepository timeRecordRepository;
 
@@ -67,52 +63,39 @@ public class HistoryListFragment extends ListFragment {
         ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(dataAdapter);
         scaleInAnimationAdapter.setAbsListView(listView);
 
-        SwipeDismissAdapter swipeDismissAdapter = new SwipeDismissAdapter(scaleInAnimationAdapter, new OnDismissCallback() {
-            @Override
-            public void onDismiss(AbsListView listView, int[] reverseSortedPositions) {
-                Iterable<TimeRecord> records = transform(asList(reverseSortedPositions), new Function<Integer, TimeRecord>() {
-                    @Override
-                    public TimeRecord apply(Integer index) {
-                        return items.get(index);
-                    }
-                });
-
-                timeRecordRepository.delete(newArrayList(records));
-
-                refreshData();
-            }
-        });
+        SwipeDismissAdapter swipeDismissAdapter = new SwipeDismissAdapter(scaleInAnimationAdapter, this);
         swipeDismissAdapter.setAbsListView(listView);
 
-        ContextualUndoAdapter contextualUndoAdapter = new ContextualUndoAdapter(swipeDismissAdapter, R.layout.history_time_record_item_undo, R.id.undo_panel, 1000, new ContextualUndoAdapter.DeleteItemCallback() {
-            @Override
-            public void deleteItem(int position) {
-                TimeRecord timeRecord = items.get(position);
-
-                timeRecordRepository.delete(timeRecord);
-
-                refreshData();
-            }
-        });
+        ContextualUndoAdapter contextualUndoAdapter = new ContextualUndoAdapter(swipeDismissAdapter, R.layout.history_time_record_item_undo, R.id.undo_panel, DELETE_DELAY_TIME, this);
         contextualUndoAdapter.setAbsListView(listView);
 
         return contextualUndoAdapter;
     }
 
     private void refreshData() {
-        CloseableIterator<TimeRecord> iterator = dataProvider.getIterator(timeRecordRepository);
-
         items.clear();
 
-        addAll(items, limit(iterator, 10));
-
+        dataProvider.loadData(getActivity(), MAX_ITEM_COUNT, items);
         dataAdapter.notifyDataSetChanged();
+    }
 
-        iterator.closeQuietly();
+    @Override
+    public void onDismiss(AbsListView listView, int[] reverseSortedPositions) {
+    }
+
+    @Override
+    public void deleteItem(int position) {
+        TimeRecord timeRecord = items.get(position);
+
+        dataProvider.delete(getActivity(), timeRecord);
+
+        refreshData();
     }
 
     public static interface HistoryListProvider extends Serializable {
-        CloseableIterator<TimeRecord> getIterator(TimeRecordRepository repository);
+        void loadData(Context context, int maxItemCount, List<TimeRecord> timeRecordList);
+
+        void delete(Context context, TimeRecord timeRecord);
     }
 
     public static class TimeRecordAdapter extends ViewAdapter<TimeRecord, HistoryTimeRecordItemView> {

@@ -98,4 +98,8 @@ public class ProfileRepository {
 
         return profileDao.queryForId(id);
     }
+
+    public long profileCount() {
+        return profileDao.countOf();
+    }
 }
