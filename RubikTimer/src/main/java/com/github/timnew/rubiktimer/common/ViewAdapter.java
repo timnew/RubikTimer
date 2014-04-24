@@ -11,7 +11,7 @@ public abstract class ViewAdapter<T, TView extends View> extends BaseAdapter {
 
     protected Context context;
 
-    protected List<T> items;
+    private List<T> items;
 
     protected ViewAdapter(Context context) {
         this(context, null);
@@ -19,7 +19,11 @@ public abstract class ViewAdapter<T, TView extends View> extends BaseAdapter {
 
     protected ViewAdapter(Context context, List<T> items) {
         this.context = context;
-        this.items = items;
+        setItems(items);
+    }
+
+    public List<T> getItems() {
+        return items;
     }
 
     public void setItems(List<T> items) {
@@ -28,11 +32,13 @@ public abstract class ViewAdapter<T, TView extends View> extends BaseAdapter {
     }
 
     public int indexOf(T item) {
-        return items.indexOf(item);
+        return getItems().indexOf(item);
     }
 
     @Override
     public int getCount() {
+        List<T> items = getItems();
+
         if (items == null)
             return 0;
 
@@ -41,7 +47,7 @@ public abstract class ViewAdapter<T, TView extends View> extends BaseAdapter {
 
     @Override
     public T getItem(int position) {
-        return items.get(position);
+        return getItems().get(position);
     }
 
     @Override

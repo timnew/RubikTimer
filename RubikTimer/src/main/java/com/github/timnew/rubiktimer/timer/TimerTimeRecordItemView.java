@@ -1,4 +1,4 @@
-package com.github.timnew.rubiktimer.history;
+package com.github.timnew.rubiktimer.timer;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -13,8 +13,8 @@ import org.androidannotations.annotations.ViewById;
 
 import static com.github.timnew.rubiktimer.domain.TimeRecord.formartTime;
 
-@EViewGroup(R.layout.time_record_item_view)
-public class TimeRecordItemView extends RelativeLayout {
+@EViewGroup(R.layout.timer_time_record_item_view)
+public class TimerTimeRecordItemView extends RelativeLayout {
 
     @ViewById(R.id.profile)
     protected TextView profileView;
@@ -22,15 +22,15 @@ public class TimeRecordItemView extends RelativeLayout {
     @ViewById(R.id.time)
     protected TextView timeView;
 
-    public TimeRecordItemView(Context context) {
+    public TimerTimeRecordItemView(Context context) {
         super(context);
     }
 
-    public TimeRecordItemView(Context context, AttributeSet attrs) {
+    public TimerTimeRecordItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public TimeRecordItemView(Context context, AttributeSet attrs, int defStyle) {
+    public TimerTimeRecordItemView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
