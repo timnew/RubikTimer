@@ -11,6 +11,7 @@ import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.OrmLiteDao;
 
 import java.sql.SQLException;
+import java.util.Collection;
 
 import static org.androidannotations.annotations.EBean.Scope.Singleton;
 
@@ -51,5 +52,13 @@ public class TimeRecordRepository {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    public void delete(Collection<TimeRecord> records) {
+        timeRecordDao.delete(records);
+    }
+
+    public void delete(TimeRecord timeRecord) {
+        timeRecordDao.delete(timeRecord);
     }
 }

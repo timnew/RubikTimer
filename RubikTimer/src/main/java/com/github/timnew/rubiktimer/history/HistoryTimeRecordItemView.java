@@ -19,12 +19,16 @@ import static org.joda.time.format.DateTimeFormat.forPattern;
 public class HistoryTimeRecordItemView extends FrameLayout {
 
     public static final DateTimeFormatter TIMESTAMP_FORMATTER = forPattern("YYYY MMM dd");
+
     @ViewById(R.id.profile_icon)
     protected ImageView profileIconView;
+
     @ViewById(R.id.profile)
     protected TextView profileView;
+
     @ViewById(R.id.timestamp)
     protected TextView timestampView;
+    
     @ViewById(R.id.time)
     protected TextView timeView;
 

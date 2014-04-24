@@ -2,6 +2,9 @@ package com.github.timnew.rubiktimer.history;
 
 import android.content.Context;
 import android.support.v4.app.ListFragment;
+import android.widget.AbsListView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.github.timnew.rubiktimer.R;
 import com.github.timnew.rubiktimer.common.ViewAdapter;
@@ -9,7 +12,12 @@ import com.github.timnew.rubiktimer.database.ProfileRepository;
 import com.github.timnew.rubiktimer.database.TimeRecordRepository;
 import com.github.timnew.rubiktimer.domain.Profile;
 import com.github.timnew.rubiktimer.domain.TimeRecord;
+import com.google.common.base.Function;
 import com.j256.ormlite.dao.CloseableIterator;
+import com.nhaarman.listviewanimations.itemmanipulation.OnDismissCallback;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.contextualundo.ContextualUndoAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -20,8 +28,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Iterators.addAll;
 import static com.google.common.collect.Iterators.limit;
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.primitives.Ints.asList;
 
 @EFragment(R.layout.history_list_fragment)
 public class HistoryListFragment extends ListFragment {
@@ -37,15 +48,55 @@ public class HistoryListFragment extends ListFragment {
 
     protected List<TimeRecord> items = new ArrayList<TimeRecord>();
 
-    private HistoryItemAdapter adapter;
+    private TimeRecordAdapter dataAdapter;
 
     @AfterViews
     protected void afterViews() {
-        adapter = new HistoryItemAdapter(getActivity(), profileRepository.currentProfile(), items);
+        ListAdapter listAdapter = buildAdapterChain();
 
         refreshData();
 
-        setListAdapter(adapter);
+        setListAdapter(listAdapter);
+    }
+
+    private ListAdapter buildAdapterChain() {
+        ListView listView = getListView();
+
+        dataAdapter = new TimeRecordAdapter(getActivity(), profileRepository.currentProfile(), items);
+
+        ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(dataAdapter);
+        scaleInAnimationAdapter.setAbsListView(listView);
+
+        SwipeDismissAdapter swipeDismissAdapter = new SwipeDismissAdapter(scaleInAnimationAdapter, new OnDismissCallback() {
+            @Override
+            public void onDismiss(AbsListView listView, int[] reverseSortedPositions) {
+                Iterable<TimeRecord> records = transform(asList(reverseSortedPositions), new Function<Integer, TimeRecord>() {
+                    @Override
+                    public TimeRecord apply(Integer index) {
+                        return items.get(index);
+                    }
+                });
+
+                timeRecordRepository.delete(newArrayList(records));
+
+                refreshData();
+            }
+        });
+        swipeDismissAdapter.setAbsListView(listView);
+
+        ContextualUndoAdapter contextualUndoAdapter = new ContextualUndoAdapter(swipeDismissAdapter, R.layout.history_time_record_item_undo, R.id.undo_panel, 1000, new ContextualUndoAdapter.DeleteItemCallback() {
+            @Override
+            public void deleteItem(int position) {
+                TimeRecord timeRecord = items.get(position);
+
+                timeRecordRepository.delete(timeRecord);
+
+                refreshData();
+            }
+        });
+        contextualUndoAdapter.setAbsListView(listView);
+
+        return contextualUndoAdapter;
     }
 
     private void refreshData() {
@@ -55,7 +106,7 @@ public class HistoryListFragment extends ListFragment {
 
         addAll(items, limit(iterator, 10));
 
-        adapter.notifyDataSetChanged();
+        dataAdapter.notifyDataSetChanged();
 
         iterator.closeQuietly();
     }
@@ -64,14 +115,19 @@ public class HistoryListFragment extends ListFragment {
         CloseableIterator<TimeRecord> getIterator(TimeRecordRepository repository);
     }
 
-    public static class HistoryItemAdapter extends ViewAdapter<TimeRecord, HistoryTimeRecordItemView> {
+    public static class TimeRecordAdapter extends ViewAdapter<TimeRecord, HistoryTimeRecordItemView> {
 
         private final Profile currentProfile;
 
-        public HistoryItemAdapter(Context context, Profile currentProfile, List<TimeRecord> items) {
+        public TimeRecordAdapter(Context context, Profile currentProfile, List<TimeRecord> items) {
             super(context, items);
 
             this.currentProfile = currentProfile;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return getItem(position).getId();
         }
 
         @Override
