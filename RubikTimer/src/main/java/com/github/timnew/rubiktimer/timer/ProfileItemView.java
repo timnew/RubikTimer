@@ -2,6 +2,7 @@ package com.github.timnew.rubiktimer.timer;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,11 @@ public class ProfileItemView extends RelativeLayout {
     @ViewById(R.id.profile_name)
     protected TextView profileNameView;
 
+    @ViewById(R.id.delete_indicator)
+    protected ImageView deleteIndicator;
+
+    private Profile profile;
+
     public ProfileItemView(Context context) {
         super(context);
     }
@@ -30,6 +36,11 @@ public class ProfileItemView extends RelativeLayout {
     }
 
     public void updateView(Profile profile) {
+        this.profile = profile;
         profileNameView.setText(profile.getName());
+    }
+
+    public void setDeleteMode(boolean isDeleting) {
+        deleteIndicator.setVisibility(isDeleting ? VISIBLE : INVISIBLE);
     }
 }
