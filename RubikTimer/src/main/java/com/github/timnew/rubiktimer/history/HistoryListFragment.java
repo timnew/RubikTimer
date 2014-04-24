@@ -5,10 +5,10 @@ import android.support.v4.app.ListFragment;
 
 import com.github.timnew.rubiktimer.R;
 import com.github.timnew.rubiktimer.common.ViewAdapter;
+import com.github.timnew.rubiktimer.database.ProfileRepository;
 import com.github.timnew.rubiktimer.database.TimeRecordRepository;
+import com.github.timnew.rubiktimer.domain.Profile;
 import com.github.timnew.rubiktimer.domain.TimeRecord;
-import com.github.timnew.rubiktimer.timer.TimerTimeRecordItemView;
-import com.github.timnew.rubiktimer.timer.TimerTimeRecordItemView_;
 import com.j256.ormlite.dao.CloseableIterator;
 
 import org.androidannotations.annotations.AfterViews;
@@ -29,6 +29,9 @@ public class HistoryListFragment extends ListFragment {
     @Bean
     protected TimeRecordRepository timeRecordRepository;
 
+    @Bean
+    protected ProfileRepository profileRepository;
+
     @FragmentArg
     protected HistoryListProvider dataProvider;
 
@@ -38,7 +41,7 @@ public class HistoryListFragment extends ListFragment {
 
     @AfterViews
     protected void afterViews() {
-        adapter = new HistoryItemAdapter(getActivity(), items);
+        adapter = new HistoryItemAdapter(getActivity(), profileRepository.currentProfile(), items);
 
         refreshData();
 
@@ -61,19 +64,24 @@ public class HistoryListFragment extends ListFragment {
         CloseableIterator<TimeRecord> getIterator(TimeRecordRepository repository);
     }
 
-    public static class HistoryItemAdapter extends ViewAdapter<TimeRecord, TimerTimeRecordItemView> {
-        public HistoryItemAdapter(Context context, List<TimeRecord> items) {
+    public static class HistoryItemAdapter extends ViewAdapter<TimeRecord, HistoryTimeRecordItemView> {
+
+        private final Profile currentProfile;
+
+        public HistoryItemAdapter(Context context, Profile currentProfile, List<TimeRecord> items) {
             super(context, items);
+
+            this.currentProfile = currentProfile;
         }
 
         @Override
-        protected TimerTimeRecordItemView createView() {
-            return TimerTimeRecordItemView_.build(context);
+        protected HistoryTimeRecordItemView createView() {
+            return HistoryTimeRecordItemView_.build(context);
         }
 
         @Override
-        protected void updateView(TimerTimeRecordItemView view, TimeRecord item) {
-            view.updateView(item);
+        protected void updateView(HistoryTimeRecordItemView view, TimeRecord item) {
+            view.updateView(currentProfile == item.getProfile(), item);
         }
     }
 }

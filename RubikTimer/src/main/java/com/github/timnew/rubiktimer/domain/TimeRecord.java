@@ -53,6 +53,10 @@ public class TimeRecord {
         return time;
     }
 
+    public String getFormatedTime() {
+        return formartTime(getTime());
+    }
+
     public DateTime getCreatedAt() {
         return createdAt;
     }

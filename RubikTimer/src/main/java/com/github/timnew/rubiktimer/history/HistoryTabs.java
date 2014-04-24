@@ -58,7 +58,7 @@ public enum HistoryTabs implements HistoryListProvider {
     LOCAL_TIME {
         @Override
         public boolean shouldShow() {
-            return true;
+            return false;
         }
 
         @Override
@@ -74,7 +74,7 @@ public enum HistoryTabs implements HistoryListProvider {
     LOCAL_BEST {
         @Override
         public boolean shouldShow() {
-            return true;
+            return false;
         }
 
         @Override

@@ -43,7 +43,7 @@ public class RenameProfileDialog extends DialogFragment {
         profileNameView.setHint(R.string.profile_name);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                .setIcon(R.drawable.profile_icon)
+                .setIcon(R.drawable.timer_profile_icon)
                 .setTitle(R.string.rename_profile)
                 .setView(profileNameView)
                 .setPositiveButton(R.string.rename, new DialogInterface.OnClickListener() {

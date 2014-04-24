@@ -11,9 +11,7 @@ import com.github.timnew.rubiktimer.domain.TimeRecord;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-import static com.github.timnew.rubiktimer.domain.TimeRecord.formartTime;
-
-@EViewGroup(R.layout.timer_time_record_item_view)
+@EViewGroup(R.layout.timer_time_record_item)
 public class TimerTimeRecordItemView extends RelativeLayout {
 
     @ViewById(R.id.profile)
@@ -36,6 +34,6 @@ public class TimerTimeRecordItemView extends RelativeLayout {
 
     public void updateView(TimeRecord timeRecord) {
         profileView.setText(timeRecord.getProfile().getName());
-        timeView.setText(formartTime(timeRecord.getTime()));
+        timeView.setText(timeRecord.getFormatedTime());
     }
 }
