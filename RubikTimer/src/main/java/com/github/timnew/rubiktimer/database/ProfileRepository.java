@@ -23,7 +23,6 @@ public class ProfileRepository {
     protected RuntimeExceptionDao<Profile, Integer> profileDao;
 
     private Profile currentProfile;
-    private boolean anonymousMode;
 
     private void initCurrentProfile() {
         Profile currentProfile;
@@ -59,20 +58,20 @@ public class ProfileRepository {
     }
 
     public Profile currentActiveProfile() {
-        return anonymousMode ? Profile.ANONYMOUS : currentProfile();
+        return isAnonymousMode() ? Profile.ANONYMOUS : currentProfile();
     }
 
     public boolean isAnonymousMode() {
-        return anonymousMode;
+        return appSettings.anonymousMode().get();
     }
 
     public void setAnonymousMode(boolean anonymousMode) {
-        this.anonymousMode = anonymousMode;
+        appSettings.anonymousMode().put(anonymousMode);
     }
 
     public Profile activeProfile(Profile currentProfile) {
-        this.currentProfile = currentProfile;
         appSettings.currentUserId().put(currentProfile.getId());
+        this.currentProfile = currentProfile;
         return currentProfile;
     }
 
